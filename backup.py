@@ -33,16 +33,17 @@ def main():
 	tmp = config.c_config()
 	tmp.data['last'] = 0
 	tmp.load(basepath+"/tmp/"+os.path.splitext(os.path.basename(main_lib.__file__))[0]+".json")
-	list = []
-	for entry in cfg.data['folder']:
-		if not ("recursive" in entry):
-			entry["recursive"] = False
-		list = list + helper.scandir(basepath, entry['path'], entry['recursive'])
-	awsSession = aws.c_aws(cfg.data["aws"]["key"])
-	for file in list:
-		if tmp.data['last']-cfg.data['delta']<int(os.path.getmtime(file)):
-			key = file.replace(basepath, cfg.data['s3folder'])
-			awsSession.s3.Bucket(cfg.data["s3bucket"]).upload_file(file, key)
+	for packet in cfg.data["packets"]:
+		list = []
+		for entry in packet['folder']:
+			if not ("recursive" in entry):
+				entry["recursive"] = False
+			list = list + helper.scandir(basepath, entry['path'], entry['recursive'])
+			awsSession = aws.c_aws(cfg.data["aws"]["key"])
+		for file in list:
+			if tmp.data['last']-packet['delta']<int(os.path.getmtime(file)):
+				key = file.replace(basepath, packet['s3folder'])
+				awsSession.s3.Bucket(packet["s3bucket"]).upload_file(file, key)
 	tmp.data['last'] = int(time.time())
 	tmp.save()
 

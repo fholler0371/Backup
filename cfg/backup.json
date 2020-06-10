@@ -1,1 +1,1 @@
-{"aws":{"key":{"region":"eu-central-1","key":"aws-key", "secret":"aws-secret"}},"s3bucket":"aws-bucket","s3folder":"aws-folder","delta":604800,"folder":[{"path":"./*.py"},{"path":"lib/*.py", "recursive":true},{"path":"cfg/*.json"}]}
+{"aws":{"key":{"region":"eu-central-1","key":"aws-key", "secret":"aws-secret"}},"packets":[{"s3bucket":"aws-bucket","s3folder":"aws-folder","delta":604800,"folder":[{"path":"./*.py"},{"path":"lib/*.py", "recursive":true},{"path":"cfg/*.json"}]}]}
