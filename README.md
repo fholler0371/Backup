@@ -1,3 +1,3 @@
 # Backup.py
 
-Meine Pythom zu AWS-S3 Backulösung
+Meine Python-Tool für Backup zu AWS-S3
